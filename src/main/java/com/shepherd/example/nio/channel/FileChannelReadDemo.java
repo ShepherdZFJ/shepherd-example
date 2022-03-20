@@ -24,8 +24,9 @@ public class FileChannelReadDemo {
         while(bytesRead != -1) {
             System.out.println("读取了："+bytesRead);
             buf.flip();
-            String str = new String(buf.array(), "utf-8");
-            System.out.print(str);
+            while(buf.hasRemaining()) {
+                System.out.println((char)buf.get());
+            }
             buf.clear();
             bytesRead = channel.read(buf);
         }
