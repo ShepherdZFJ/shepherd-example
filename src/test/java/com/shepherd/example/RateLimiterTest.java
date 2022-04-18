@@ -3,7 +3,6 @@ package com.shepherd.example;
 import com.alibaba.fastjson.JSONObject;
 import com.shepherd.example.limit.redis.FixWindowRateLimiter;
 import com.shepherd.example.limit.redis.SlideWindowRateLimiter;
-import netscape.javascript.JSObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
