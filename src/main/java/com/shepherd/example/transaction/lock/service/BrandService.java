@@ -53,6 +53,16 @@ public class BrandService {
         TimeUnit.MINUTES.sleep(1);
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    public void updateByIndex() throws InterruptedException {
+        LambdaUpdateWrapper<Brand> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.ge(Brand::getLetter, "b");
+        updateWrapper.set(Brand::getDescription, "通过索引字段条件更新描述信息哦11111");
+        brandDAO.update(new Brand(), updateWrapper);
+        // 睡眠1分钟，模仿长事务
+        TimeUnit.MINUTES.sleep(1);
+    }
+
 
     /**
      * updateOne()和update()一起执行时，由于update()事务brand表数据锁住，所以updateOne会报错：
@@ -65,8 +75,8 @@ public class BrandService {
     @Transactional(rollbackFor = Exception.class)
     public void updateOne() {
         Brand brand = new Brand();
-        brand.setId(278755l);
-        brand.setIsDelete(1);
+        brand.setId(1528l);
+        brand.setIsDelete(2);
         brand.setUpdateTime(new Date());
         brandDAO.updateById(brand);
     }

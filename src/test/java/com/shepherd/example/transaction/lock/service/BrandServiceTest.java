@@ -40,6 +40,11 @@ public class BrandServiceTest {
         brandService.updateByPrimaryKey();
     }
 
+    @Test
+    public void updateByIndex() throws InterruptedException {
+        brandService.updateByIndex();
+    }
+
 
     @Test
     public void updateOne() {
