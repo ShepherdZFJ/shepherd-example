@@ -29,4 +29,14 @@ public class BrandServiceTest {
         System.out.println(list.size());
         System.out.println(list);
     }
+
+    @Test
+    public void update() throws InterruptedException {
+        brandService.update();
+    }
+
+    @Test
+    public void updateOne() {
+        brandService.updateOne();
+    }
 }
