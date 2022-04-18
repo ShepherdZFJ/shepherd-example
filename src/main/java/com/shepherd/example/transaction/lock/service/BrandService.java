@@ -42,9 +42,25 @@ public class BrandService {
         TimeUnit.MINUTES.sleep(1);
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    public void updateByPrimaryKey() throws InterruptedException {
+        Brand brand = new Brand();
+        brand.setId(1115L);
+        brand.setDescription("htc就是火腿肠手机啦");
+        brand.setUpdateTime(new Date());
+        brandDAO.updateById(brand);
+        // 睡眠1分钟，模仿长事务
+        TimeUnit.MINUTES.sleep(1);
+    }
+
+
     /**
      * updateOne()和update()一起执行时，由于update()事务brand表数据锁住，所以updateOne会报错：
      *  Lock wait timeout exceeded; try restarting transaction;
+     *
+     *  updateByPrimaryKey()和update()一起执行时, 即使updateByPrimaryKey()是长事务，也不会锁住，因为updateByPrimaryKey()事务
+     *  不会锁全表数据，只锁当前主键行数据
+     *
      */
     @Transactional(rollbackFor = Exception.class)
     public void updateOne() {

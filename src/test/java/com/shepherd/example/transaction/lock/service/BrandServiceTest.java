@@ -36,6 +36,12 @@ public class BrandServiceTest {
     }
 
     @Test
+    public void updateByPrimaryKey() throws InterruptedException {
+        brandService.updateByPrimaryKey();
+    }
+
+
+    @Test
     public void updateOne() {
         brandService.updateOne();
     }
