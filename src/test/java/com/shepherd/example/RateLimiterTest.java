@@ -6,9 +6,11 @@ import com.shepherd.example.limit.redis.SlideWindowRateLimiter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -23,6 +25,8 @@ public class RateLimiterTest {
     private FixWindowRateLimiter fixWindowRateLimiter;
     @Resource
     private SlideWindowRateLimiter slideWindowRateLimiter;
+    @Resource
+    private RedisTemplate redisTemplate;
 
     @Test
     public void testFixWindow() throws InterruptedException {
@@ -45,5 +49,13 @@ public class RateLimiterTest {
                 TimeUnit.SECONDS.sleep(1);
             }
         }
+    }
+
+    @Test
+    public void test() {
+        Long size = redisTemplate.opsForZSet().size("operation_call_uuid");
+        Set operation_call_uuid = redisTemplate.opsForZSet().rangeWithScores("operation_call_uuid", 0 , 0);
+        System.out.println(size);
+
     }
 }
