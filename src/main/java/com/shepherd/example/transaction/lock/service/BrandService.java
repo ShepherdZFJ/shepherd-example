@@ -56,7 +56,7 @@ public class BrandService {
     @Transactional(rollbackFor = Exception.class)
     public void updateByIndex() throws InterruptedException {
         LambdaUpdateWrapper<Brand> updateWrapper = new LambdaUpdateWrapper<>();
-        updateWrapper.ge(Brand::getLetter, "b");
+        updateWrapper.eq(Brand::getLetter, "b");
         updateWrapper.set(Brand::getDescription, "通过索引字段条件更新描述信息哦11111");
         brandDAO.update(new Brand(), updateWrapper);
         // 睡眠1分钟，模仿长事务
@@ -70,6 +70,8 @@ public class BrandService {
      *
      *  updateByPrimaryKey()和update()一起执行时, 即使updateByPrimaryKey()是长事务，也不会锁住，因为updateByPrimaryKey()事务
      *  不会锁全表数据，只锁当前主键行数据
+     *
+     *  updateByIndex()update()一起执行时, 只会锁住命中索引的行，不会全表锁住
      *
      */
     @Transactional(rollbackFor = Exception.class)
