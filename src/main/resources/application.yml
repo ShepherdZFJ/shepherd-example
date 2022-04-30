@@ -1,5 +1,5 @@
 server:
-  port: 8188
+  port: 8288
 spring:
   redis:
     host: 110.42.224.58
@@ -15,8 +15,11 @@ nacos:
     namespace: 6de43a50-61da-426a-9b2c-df474034c13d
     type: properties
     data-id: example.properties
+    bootstrap:
+      enable: true
 
 user1:
   name: shepherd-local
   age: 18
   id: 127
+
