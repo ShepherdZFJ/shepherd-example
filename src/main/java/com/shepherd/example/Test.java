@@ -5,6 +5,8 @@ import org.springframework.util.DigestUtils;
 import java.nio.charset.StandardCharsets;
 import java.util.Random;
 import java.util.Stack;
+import java.util.UUID;
+import java.util.regex.Pattern;
 
 import static com.alibaba.fastjson.util.IOUtils.DIGITS;
 
@@ -16,8 +18,8 @@ import static com.alibaba.fastjson.util.IOUtils.DIGITS;
 
 public class Test {
     public static void main(String[] args) {
-        String s = "hello \n wsdfsdf";
-        System.out.println(s);
+        String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+        System.out.println(uuid);
 
     }
 
