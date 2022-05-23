@@ -18,8 +18,13 @@ import static com.alibaba.fastjson.util.IOUtils.DIGITS;
 
 public class Test {
     public static void main(String[] args) {
-        String uuid = UUID.randomUUID().toString().replaceAll("-", "");
-        System.out.println(uuid);
+        int n = 15;
+        n |= n >>> 1;
+        n |= n >>> 2;
+        n |= n >>> 4;
+        n |= n >>> 8;
+        n |= n >>> 16;
+        System.out.println(n);
 
     }
 
