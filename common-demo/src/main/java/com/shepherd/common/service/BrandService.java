@@ -1,9 +1,9 @@
-package com.shepherd.common.lock.service;
+package com.shepherd.common.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.shepherd.common.entity.Brand;
-import com.shepherd.common.lock.dao.BrandDAO;
+import com.shepherd.common.dao.BrandDAO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

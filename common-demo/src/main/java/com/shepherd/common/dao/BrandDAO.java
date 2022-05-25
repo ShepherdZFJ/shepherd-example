@@ -1,4 +1,4 @@
-package com.shepherd.common.lock.dao;
+package com.shepherd.common.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
