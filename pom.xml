@@ -42,6 +42,11 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
         <!--  引入web依赖，配置端口启动项目   -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

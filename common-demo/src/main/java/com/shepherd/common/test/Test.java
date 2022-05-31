@@ -1,5 +1,6 @@
 package com.shepherd.common.test;
 
+import java.math.BigDecimal;
 import java.util.Random;
 
 /**
@@ -10,13 +11,9 @@ import java.util.Random;
 
 public class Test {
     public static void main(String[] args) {
-        int n = 15;
-        n |= n >>> 1;
-        n |= n >>> 2;
-        n |= n >>> 4;
-        n |= n >>> 8;
-        n |= n >>> 16;
-        System.out.println(n);
+       String str = "8673";
+        BigDecimal bigDecimal = new BigDecimal(str);
+        System.out.println(bigDecimal);
 
     }
 

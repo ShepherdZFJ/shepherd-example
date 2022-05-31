@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.shepherd"})
-@NacosPropertySource(dataId = "example.properties", autoRefreshed = true)
+//@NacosPropertySource(dataId = "example.properties", autoRefreshed = true)
 public class CommonDemoApplication {
 
     public static void main(String[] args) {

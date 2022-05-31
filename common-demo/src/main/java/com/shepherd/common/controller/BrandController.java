@@ -2,9 +2,10 @@ package com.shepherd.common.controller;
 
 import com.shepherd.common.entity.Brand;
 import com.shepherd.common.service.BrandService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.shepherd.common.vo.BrandVO;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -19,10 +20,23 @@ import java.util.List;
 public class BrandController {
     @Resource
     private BrandService brandService;
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
+
+    @PostMapping
+    public void addBrand(@RequestBody @Validated BrandVO brandVO) {
+        System.out.println(brandVO);
+    }
 
     @GetMapping
     public List<Brand> getList() {
         return brandService.getAll();
+    }
+
+    @GetMapping("/redis")
+    public String getRedisValue() {
+        String value = stringRedisTemplate.opsForValue().get("brand_key");
+        return value;
     }
 
 }
