@@ -1,0 +1,12 @@
+server:
+  port: 8600
+
+spring:
+  application:
+    name: third-api-demo
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+    #设置返回json数据null字段不显示
+    default-property-inclusion: non_null
+product-server: http://127.0.0.1:18200/api/mall/product
