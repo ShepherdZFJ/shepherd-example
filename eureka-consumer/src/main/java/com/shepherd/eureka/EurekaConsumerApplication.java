@@ -59,7 +59,7 @@ public class EurekaConsumerApplication {
         public String hello(String name) {
             // <1> 获得服务 `demo-provider` 的一个实例
             // 获取服务 `demo-provider` 对应的实例列表
-//            List<ServiceInstance> instances = discoveryClient.getInstances("eureka-provider");
+            List<ServiceInstance> instances = discoveryClient.getInstances("eureka-provider");
 //                // 选择第一个
 //            ServiceInstance instance = instances.size() > 0 ? instances.get(0) : null;
             ServiceInstance instance = loadBalancerClient.choose("eureka-provider");

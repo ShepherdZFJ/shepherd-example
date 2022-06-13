@@ -27,7 +27,7 @@ public class EurekaProviderApplication {
         private String serverPort;
 
         @GetMapping("/provider")
-        public String echo(String name) {
+        public String test(String name) {
             log.info("我被调用了, {}", serverPort);
             return "provider:" + name;
         }
