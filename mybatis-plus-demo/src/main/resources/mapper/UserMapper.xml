@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shepherd.mybatisplus.demo.dao.UserDAO">
+
+    <select id="getUser" resultType="com.shepherd.mybatisplus.demo.entity.User">
+--         select user.* from user  INNER JOIN brand  on brand.user_id = user.id where brand.id = #{id}
+select * from (select u.* from user u INNER JOIN brand b on b.user_id = u.id where b.id=#{id}) as a
+    </select>
+</mapper>
