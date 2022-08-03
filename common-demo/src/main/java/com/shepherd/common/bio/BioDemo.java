@@ -13,12 +13,36 @@ import java.nio.channels.FileChannel;
  */
 public class BioDemo {
     public static void main(String[] args) throws IOException {
-        String source = "/Users/shepherdmy/baiduYunDownload/72-Elasticsearch核心技术与实战/13丨通过Analyzer进行分词.mp4";
-        String destination = "/Users/shepherdmy/Desktop/bio/bak/es.mp4";
-        long start = System.currentTimeMillis();
-        copyWithFileChannel(source, destination);
-        long end = System.currentTimeMillis();
-        System.out.println(end-start);
+//        String source = "/Users/shepherdmy/baiduYunDownload/72-Elasticsearch核心技术与实战/13丨通过Analyzer进行分词.mp4";
+//        String destination = "/Users/shepherdmy/Desktop/bio/bak/es.mp4";
+//        long start = System.currentTimeMillis();
+//        copyWithFileChannel(source, destination);
+//        long end = System.currentTimeMillis();
+//        System.out.println(end-start);
+
+        ////    String word = "hahahahhahahahhah";
+////    FileOutputStream fileOutputStream = null;
+////    File file = new File("/Users/shepherdmy/Desktop/test_voice.txt");
+////    if(!file.exists()){
+////      file.createNewFile();
+////    }
+////    fileOutputStream = new FileOutputStream(file);
+////    fileOutputStream.write(s.getBytes("gbk"));
+////    fileOutputStream.flush();
+////    fileOutputStream.close();
+//
+//    String word = "试试wefwf wew23423456电饭锅";
+//    String path = "/Users/shepherdmy/Desktop/test_voice.txt";
+//    BufferedWriter out = new BufferedWriter(
+//            new OutputStreamWriter(new FileOutputStream(path,true)));
+//    out.write(word+"\r\n");
+//    out.close();
+//    System.out.println(s);
+        File file = new File("test_voice.txt");
+        FileUtils.write(file, "我们we are family\r\n", true);
+        FileUtils.write(file, "er二二二二2222\r\n", true);
+        readFile();
+        System.out.println(111);
     }
 
     public static void copyWithFileInputStream(String source, String destination) throws IOException {
@@ -78,4 +102,26 @@ public class BioDemo {
     public static void copyWithUtils(String source, String destination) throws IOException {
         FileUtils.copyFile(new File(source), new File(destination));
     }
+
+
+    public static void readFile() {
+        String pathname = "test_voice.txt"; // 绝对路径或相对路径都可以，写入文件时演示相对路径,读取以上路径的input.txt文件
+        //防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw;
+        //不关闭文件会导致资源的泄露，读写文件都同理
+        //Java7的try-with-resources可以优雅关闭文件，异常时自动关闭文件；详细解读https://stackoverflow.com/a/12665271
+        try (FileReader reader = new FileReader(pathname);
+             BufferedReader br = new BufferedReader(reader) // 建立一个对象，它把文件内容转成计算机能读懂的语言
+        ) {
+            String line;
+            //网友推荐更加简洁的写法
+            while ((line = br.readLine()) != null) {
+                // 一次读入一行数据
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
