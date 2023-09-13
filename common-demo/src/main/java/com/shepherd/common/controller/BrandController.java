@@ -28,10 +28,10 @@ public class BrandController {
         System.out.println(brandVO);
     }
 
-    @GetMapping
-    public List<Brand> getList() {
-        return brandService.getAll();
-    }
+//    @GetMapping
+//    public List<Brand> getList() {
+//        return brandService.getAll();
+//    }
 
     @GetMapping("/redis")
     public String getRedisValue() {

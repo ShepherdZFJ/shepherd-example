@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
  */
 @Data
 @Component
-@NacosConfigurationProperties(prefix = "user1", autoRefreshed = true, dataId = "example.properties")
+//@NacosConfigurationProperties(prefix = "user1", autoRefreshed = true, dataId = "example.properties")
 //@ConfigurationProperties(prefix = "user1")
 public class User {
     private String name;

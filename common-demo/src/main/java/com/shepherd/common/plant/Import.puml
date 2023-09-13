@@ -1,0 +1,9 @@
+@startuml
+!theme materia-outline
+skinparam backgroundColor #ffffff
+start
+:Hello world;
+:This is defined on
+several **lines**;
+stop
+@enduml

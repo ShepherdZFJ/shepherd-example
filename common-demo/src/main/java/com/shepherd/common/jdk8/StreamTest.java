@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
  */
 public class StreamTest {
     public static void main(String[] args) {
-//        distinctObjByField();
-        emptyFiled();
+        distinctObjByField();
+//        emptyFiled();
     }
 
     private static final ArrayList<User> users = Lists.newArrayList(User.builder().id(1l).age(20).name("xiao").gender(1).build(),
