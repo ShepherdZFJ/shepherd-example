@@ -1,6 +1,5 @@
 package com.shepherd.mybatisplus.demo.dao;
 
-import com.baomidou.mybatisplus.annotation.SqlParser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.shepherd.mybatisplus.demo.entity.User;
 
@@ -11,6 +10,4 @@ import com.shepherd.mybatisplus.demo.entity.User;
  */
 public interface UserDAO extends BaseMapper<User> {
 
-//    @SqlParser(filter = true)
-    User getUser(Long id);
 }
