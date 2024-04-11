@@ -1,5 +1,7 @@
 package com.shepherd.basedemo.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,9 +20,10 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-//@TableName(value = "tb_user")
+@TableName(value = "tb_user")
 public class User {
 
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     private String userNo;

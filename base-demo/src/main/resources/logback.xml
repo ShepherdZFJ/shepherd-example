@@ -53,6 +53,6 @@
         <appender-ref ref="fileInfoLog" />
         <appender-ref ref="fileErrorLog" />
     </root>
-<!--    <logger name="com.shepherd.common.dao" level="DEBUG" />-->
+    <logger name="com.shepherd.basedemo.dao" level="DEBUG" />
 
 </configuration>
