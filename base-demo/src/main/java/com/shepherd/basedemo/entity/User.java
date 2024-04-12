@@ -38,6 +38,8 @@ public class User {
 
     private Date birthday;
 
+    private String address;
+
     private Integer isDelete;
 
 }
