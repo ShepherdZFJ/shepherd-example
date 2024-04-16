@@ -26,14 +26,14 @@ public class UserServiceImplTest {
     @Test
     public void testEvent() throws InterruptedException {
         User user = User.builder().userNo("1111").birthday(new Date()).gender(0)
-                .phone("12345677890").email("shepherd@163.com").nickname("芽儿哟").build();
+                .phone("12345677890").email("shepherd@163.com").name("芽儿哟").build();
         userService.registerUser(user);
     }
 
     @Test
     public void testAdd() {
         User user = User.builder().userNo("123").birthday(new Date()).gender(0).
-                email("105768@qq.com").phone("1233463466").nickname("哈哈").isDelete(0).build();
+                email("105768@qq.com").phone("1233463466").name("哈哈").isDelete(0).build();
         userService.addUser(user);
     }
 
@@ -53,7 +53,7 @@ public class UserServiceImplTest {
             user.setGender( i%2 == 0 ? 0:1);
             user.setEmail(generateRandomEmail());
             user.setPhone(generateRandomPhoneNumber());
-            user.setNickname(generateRandomName());
+            user.setName(generateRandomName());
             user.setIsDelete(0);
             users.add(user);
             i++;

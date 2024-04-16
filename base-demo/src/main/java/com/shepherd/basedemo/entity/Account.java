@@ -18,6 +18,4 @@ public class Account {
     private BigDecimal amount;
     private Integer status;
     private Date lastUsedTime;
-
-
 }
