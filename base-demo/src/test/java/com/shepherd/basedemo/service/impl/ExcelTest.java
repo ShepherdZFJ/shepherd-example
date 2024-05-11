@@ -2,11 +2,14 @@ package com.shepherd.basedemo.service.impl;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
+import com.alibaba.excel.support.ExcelTypeEnum;
 import com.alibaba.excel.util.ListUtils;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.shepherd.basedemo.entity.Account;
 import com.shepherd.basedemo.entity.User;
 import com.shepherd.basedemo.excel.listener.AccountExcelListener;
+import com.shepherd.basedemo.excel.listener.BaseExcelListener;
+import com.shepherd.basedemo.excel.listener.HeadExcelListener;
 import com.shepherd.basedemo.excel.listener.UserExcelListener;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -15,6 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import sun.jvm.hotspot.debugger.Page;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,9 +37,10 @@ public class ExcelTest {
     public void testExcelRead() {
         String fileName = "/Users/shepherdmy/Desktop/testExcel.xlsx";
         // 读取用户信息两个sheet
-        EasyExcel.read(fileName, User.class, new UserExcelListener()).sheet(0).doRead();
-        EasyExcel.read(fileName, User.class, new UserExcelListener()).sheet(1).doRead();
+//        EasyExcel.read(fileName, User.class, new UserExcelListener()).sheet(0).doRead();
+//        EasyExcel.read(fileName, User.class, new UserExcelListener()).sheet(1).doRead();
         // 读取银行账户信息
+//        EasyExcel.read(fileName, Account.class, new HeadExcelListener()).sheet(2).doRead();
         EasyExcel.read(fileName, Account.class, new AccountExcelListener()).sheet(2).doRead();
         // 如果excel是多行表头比如说2行，需要设置行头数headRowNumber，默认不设置为1行表头，sheet不传默认读取第一个sheet
 //        EasyExcel.read(fileName, User.class, new UserExcelListener()).sheet().headRowNumber(2).doRead();
@@ -108,6 +113,40 @@ public class ExcelTest {
 
         String fileName = "export.xlsx";
         EasyExcel.write(fileName).sheet("员工").head(headList).doWrite(dataList);
+
+    }
+
+    @Test
+    public void testExcelBaselRead() {
+        String fileName = "/Users/shepherdmy/Desktop/testExcel.xlsx";
+        EasyExcel.read(fileName, User.class, new BaseExcelListener((dataList)->handleUser((List<User>) dataList))).sheet(0).headRowNumber(1).doRead();
+
+    }
+
+    void handleUser(List<User> users) {
+        System.out.println(users.size());
+        System.out.println("users:" + users);
+
+    }
+
+    @Test
+    public void testExportCSV() {
+        List<User> userList = new ArrayList<>();
+        int i = 0;
+        while (i < 10) {
+            User user = User.builder().id((long)i).userNo("no-" + i).birthday(new Date()).gender(i%3)
+                    .phone("123456789"+i).email("she12dfe@163.com").name("芽儿哟"+i).address("杭州"+i).build();
+            userList.add(user);
+            i++;
+        }
+        String fileName = "example.csv";
+        EasyExcel.write(fileName).excelType(ExcelTypeEnum.CSV).sheet("员工").doWrite(userList);
+    }
+
+    @Test
+    public void testReadCSV() {
+        String fileName = "example.csv";
+        EasyExcel.read(fileName, User.class, new UserExcelListener()).headRowNumber(0).doReadAll();
 
     }
 }
