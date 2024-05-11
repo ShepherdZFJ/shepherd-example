@@ -36,10 +36,22 @@ public class AccountExcelListener extends AnalysisEventListener<Account> {
      * @param headMap
      * @param context
      */
-    @Override
-    public void invokeHead(Map<Integer, ReadCellData<?>> headMap, AnalysisContext context) {
-       log.info("表头数据：{}", ConverterUtils.convertToStringMap(headMap, context));
-    }
+//    @Override
+//    public void invokeHead(Map<Integer, ReadCellData<?>> headMap, AnalysisContext context) {
+//       log.info("表头数据：{}", ConverterUtils.convertToStringMap(headMap, context));
+//    }
+
+
+//    @Override
+//    public void invokeHeadMap(Map<Integer, String> headMap, AnalysisContext context) {
+//        // 处理表头信息
+//        for (Map.Entry<Integer, String> entry : headMap.entrySet()) {
+//            Integer columnIndex = entry.getKey(); // 表头所在列的索引
+//            String columnName = entry.getValue(); // 表头的名称
+//            System.out.println("列索引：" + columnIndex + "，列名称：" + columnName);
+//        }
+//    }
+
 
 
 }
