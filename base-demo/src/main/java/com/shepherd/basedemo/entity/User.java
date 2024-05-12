@@ -34,9 +34,9 @@ public class User {
     private Long id;
     @ExcelProperty(index = 1, converter = UserNoConverter.class)
     private String userNo;
-    @ExcelProperty(value = "性别", converter = GenderConverter.class)
+    @ExcelProperty(value = "性别", index = 3, converter = GenderConverter.class)
     private Integer gender;
-    @ExcelProperty(value = "姓名")
+    @ExcelProperty(value = "姓名", index = 2)
     private String name;
     @ExcelProperty(index = 4)
     private Date birthday;

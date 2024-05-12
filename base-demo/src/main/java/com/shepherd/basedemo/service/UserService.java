@@ -15,4 +15,6 @@ public interface UserService {
     void addUser(User user);
 
     void batchAddUser(List<User> users);
+
+    void test();
 }

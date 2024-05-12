@@ -48,5 +48,10 @@ public class UserServiceImpl extends ServiceImpl<UserDAO, User> implements UserS
         System.out.println("插入时间：" + (end - start) + " ms");
     }
 
+    @Override
+    public void test() {
+        log.info("userService的test()执行了");
+    }
+
 
 }
