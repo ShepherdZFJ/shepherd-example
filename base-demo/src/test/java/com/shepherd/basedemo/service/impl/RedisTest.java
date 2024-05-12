@@ -41,12 +41,12 @@ public class RedisTest {
         lua.append("\nredis.call('expire',KEYS[1],ARGV[2])");
         lua.append("\nend");
         lua.append("\nreturn c;");
-        int limitCount = 10;
-        int limitPeriod = 3;
+        int limitCount = 3;
+        int limitPeriod = 60;
         List<String> keys = new ArrayList<>();
         keys.add("kk");
-        RedisScript<Number> redisScript = new DefaultRedisScript<>(lua.toString(), Number.class);
-        Number count = stringRedisTemplate.execute(redisScript, keys, String.valueOf(limitCount), String.valueOf(limitPeriod));
+        RedisScript<Long> redisScript = new DefaultRedisScript<>(lua.toString(), Long.class);
+        Long count = stringRedisTemplate.execute(redisScript, keys, String.valueOf(limitCount), String.valueOf(limitPeriod));
         System.out.println(count);
     }
 }
