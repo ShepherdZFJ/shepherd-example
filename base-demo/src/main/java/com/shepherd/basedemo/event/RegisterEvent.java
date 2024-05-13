@@ -1,7 +1,6 @@
 package com.shepherd.basedemo.event;
 
 import com.shepherd.basedemo.entity.User;
-import lombok.Data;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 
