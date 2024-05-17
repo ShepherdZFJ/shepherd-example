@@ -2,11 +2,14 @@ package com.shepherd.basedemo.service.impl;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author fjzheng
@@ -18,6 +21,12 @@ import javax.annotation.Resource;
 public class BaseTest {
     @Resource
     private ApplicationContext applicationContext;
+
+    @Value("${ip.black}")
+    private Set<String> blackIpList;
+
+    @Value("${ip.white}")
+    private Set<String> whiteIpList;
 
     @Test
     public void test() {
