@@ -1,5 +1,6 @@
 package com.shepherd.basedemo.service.impl;
 
+import com.shepherd.basedemo.dao.UserDAO;
 import com.shepherd.basedemo.entity.User;
 import com.shepherd.basedemo.service.UserService;
 import org.junit.Test;
@@ -9,6 +10,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -21,18 +24,38 @@ import java.util.*;
 public class UserServiceImplTest {
     @Resource
     private UserService userService;
+    @Resource
+    private UserDAO userDAO;
+
+
+    @Test
+    public void testWriteLocalDateTime() {
+        User user = User.builder().id(1L).userNo("001").gender(0).name("张三").phone("12234")
+                .birthday(LocalDate.now()).createTime(LocalDateTime.now()).build();
+        userDAO.insert(user);
+    }
+
+    @Test
+    public void testReadLocalDateTime() {
+        User user = userDAO.selectById(1L);
+        System.out.println(user);
+    }
+
+
+
+
 
 
     @Test
     public void testEvent() throws InterruptedException {
-        User user = User.builder().userNo("1111").birthday(new Date()).gender(0)
+        User user = User.builder().userNo("1111").birthday(LocalDate.now()).gender(0)
                 .phone("12345677890").email("shepherd@163.com").name("芽儿哟").build();
         userService.registerUser(user);
     }
 
     @Test
     public void testAdd() {
-        User user = User.builder().userNo("123").birthday(new Date()).gender(0).
+        User user = User.builder().userNo("123").birthday(LocalDate.now()).gender(0).
                 email("105768@qq.com").phone("1233463466").name("哈哈").isDelete(0).build();
         userService.addUser(user);
     }
@@ -49,7 +72,7 @@ public class UserServiceImplTest {
         while (i <= 100000) {
             User user = new User();
             user.setUserNo(UUID.randomUUID().toString());
-            user.setBirthday(new Date());
+            user.setBirthday(LocalDate.now());
             user.setGender( i%2 == 0 ? 0:1);
             user.setEmail(generateRandomEmail());
             user.setPhone(generateRandomPhoneNumber());

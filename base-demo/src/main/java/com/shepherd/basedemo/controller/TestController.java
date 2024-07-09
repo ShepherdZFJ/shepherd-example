@@ -3,18 +3,21 @@ package com.shepherd.basedemo.controller;
 import com.alibaba.excel.util.ListUtils;
 import com.pig4cloud.plugin.excel.annotation.ResponseExcel;
 import com.pig4cloud.plugin.excel.annotation.Sheet;
+import com.shepherd.basedemo.UserParam;
+import com.shepherd.basedemo.dto.UserDTO;
+import com.shepherd.basedemo.entity.Address;
 import com.shepherd.basedemo.entity.User;
 import com.shepherd.basedemo.excel.DemoData;
 import com.shepherd.basedemo.excel.anno.ExcelExport;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.xml.crypto.Data;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -49,7 +52,7 @@ public class TestController {
     @GetMapping("/user/cache")
     @Cacheable(value = "USER:", key = "#user.id")
     public User testUserCache(User user) {
-        user.setBirthday(new Date());
+//        user.setBirthday(new Date());
         return user;
     }
 
@@ -78,6 +81,29 @@ public class TestController {
     public String testFilter() {
         log.info("controller业务方法执行了");
         return "hello";
+    }
+
+    @PostMapping("/request/advice")
+    public void testRequestBodyAdvice(@RequestBody Address address) {
+        System.out.println(address);
+    }
+
+    @PostMapping("/111")
+    public void test111(@RequestBody User user) {
+        System.out.println(user);
+    }
+
+    @GetMapping("/222")
+    public void test222(User user) {
+        System.out.println(user);
+    }
+
+    @PostMapping("/date")
+    public UserDTO testLocalDateTime(@RequestBody UserParam param) {
+        UserDTO userDTO = new UserDTO();
+        BeanUtils.copyProperties(param, userDTO);
+        System.out.println(userDTO);
+        return userDTO;
     }
 
 

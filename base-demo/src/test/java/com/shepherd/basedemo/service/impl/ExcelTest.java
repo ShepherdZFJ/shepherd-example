@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import sun.jvm.hotspot.debugger.Page;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,13 +36,14 @@ public class ExcelTest {
 
     @Test
     public void testExcelRead() {
-        String fileName = "/Users/shepherdmy/Desktop/testExcel.xlsx";
+        String fileName = "/Users/shepherdmy/Desktop/111.xlsx";
+        EasyExcel.read(fileName, new BaseExcelListener(dataList -> System.out.println(dataList))).headRowNumber(1).doReadAll();
         // 读取用户信息两个sheet
 //        EasyExcel.read(fileName, User.class, new UserExcelListener()).sheet(0).doRead();
 //        EasyExcel.read(fileName, User.class, new UserExcelListener()).sheet(1).doRead();
         // 读取银行账户信息
 //        EasyExcel.read(fileName, Account.class, new HeadExcelListener()).sheet(2).doRead();
-        EasyExcel.read(fileName, Account.class, new AccountExcelListener()).sheet(2).doRead();
+//        EasyExcel.read(fileName, Account.class, new AccountExcelListener()).sheet(2).doRead();
         // 如果excel是多行表头比如说2行，需要设置行头数headRowNumber，默认不设置为1行表头，sheet不传默认读取第一个sheet
 //        EasyExcel.read(fileName, User.class, new UserExcelListener()).sheet().headRowNumber(2).doRead();
 
@@ -54,7 +56,7 @@ public class ExcelTest {
         List<User> userList = new ArrayList<>();
         int i = 0;
         while (i < 10) {
-            User user = User.builder().id((long)i).userNo("no-" + i).birthday(new Date()).gender(i%3)
+            User user = User.builder().id((long)i).userNo("no-" + i).birthday(LocalDate.now()).gender(i%3)
                     .phone("123456789"+i).email("she12dfe@163.com").name("芽儿哟"+i).address("杭州"+i).build();
             userList.add(user);
             i++;
@@ -134,7 +136,7 @@ public class ExcelTest {
         List<User> userList = new ArrayList<>();
         int i = 0;
         while (i < 10) {
-            User user = User.builder().id((long)i).userNo("no-" + i).birthday(new Date()).gender(i%3)
+            User user = User.builder().id((long)i).userNo("no-" + i).birthday(LocalDate.now()).gender(i%3)
                     .phone("123456789"+i).email("she12dfe@163.com").name("芽儿哟"+i).address("杭州"+i).build();
             userList.add(user);
             i++;

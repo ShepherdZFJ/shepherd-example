@@ -26,6 +26,6 @@ public class InterceptorConfig implements WebMvcConfigurer {
         // registry.addInterceptor(new AInterceptor()); new 拦截器会导致拦截器不能成功依赖注入
 //        registry.addInterceptor(bInterceptor).addPathPatterns("/**").excludePathPatterns("/user/**").order(2);
 //        registry.addInterceptor(aInterceptor).addPathPatterns("/**").excludePathPatterns("/user/**").order(1);
-        registry.addInterceptor(ipAccessInterceptor).addPathPatterns("/**");
+//        registry.addInterceptor(ipAccessInterceptor).addPathPatterns("/**");
     }
 }

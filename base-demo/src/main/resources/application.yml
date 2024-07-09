@@ -9,8 +9,16 @@ spring:
     port: 6379
   application:
     name: base-demo111
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    locale: zh_CN
+    time-zone: GMT+8
+    default-property-inclusion: non_null
 
 ip:
   black: 10.0.0.10, 10.0.0.18, 10.33.194.35
   white: 10.33.194.36, 10.33.194.10
+
+
+
 

@@ -6,6 +6,7 @@ import com.alibaba.excel.annotation.ExcelProperty;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.shepherd.basedemo.excel.converters.GenderConverter;
 import com.shepherd.basedemo.excel.converters.UserNoConverter;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -39,7 +42,8 @@ public class User {
     @ExcelProperty(value = "姓名", index = 2)
     private String name;
     @ExcelProperty(index = 4)
-    private Date birthday;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private LocalDate birthday;
     @ExcelProperty(index = 5, value = {"基本信息", "手机号"})
     private String phone;
     @ExcelProperty(index = 6, value = {"基本信息", "邮箱"})
@@ -48,4 +52,7 @@ public class User {
     private Integer isDelete;
     @ExcelProperty(index = 7, value = {"基本信息", "地址"})
     private String address;
+
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createTime;
 }

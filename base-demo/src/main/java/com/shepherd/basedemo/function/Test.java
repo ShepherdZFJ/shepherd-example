@@ -1,5 +1,8 @@
 package com.shepherd.basedemo.function;
 
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Executor;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -23,5 +26,36 @@ public class Test {
 
         Supplier supplier = ()->{ return 1024; };
         System.out.println(supplier.get());
+        Test test = new Test();
+        test.testProducerConsumerInner();
     }
+
+    public <T> void  producerConsumerInner(Executor executor,
+                                           Consumer<Consumer<T>> producer,
+                                           Consumer<Supplier<T>> consumer) {
+        BlockingQueue<T> blockingQueue = new LinkedBlockingQueue<>();
+        executor.execute(() -> producer.accept(blockingQueue::add));
+        executor.execute(() -> consumer.accept(() -> {
+            try {
+                return blockingQueue.take();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }));
+    }
+
+    private void testProducerConsumerInner() {
+        producerConsumerInner(Runnable::run,
+                (Consumer<Consumer<Integer>>) producer -> {
+                    producer.accept(1);
+                    producer.accept(2);
+                },
+                consumer -> {
+                    assert consumer.get() == 1;
+                    System.out.println(consumer.get());
+                    assert consumer.get() == 2;
+                });
+    }
+
+
 }

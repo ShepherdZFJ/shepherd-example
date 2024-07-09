@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
  * @version 1.0
  * @date 2024/5/11 10:55
  */
-@Aspect
-@Component
+//@Aspect
+//@Component
 @Slf4j
 public class LogAspect {
 

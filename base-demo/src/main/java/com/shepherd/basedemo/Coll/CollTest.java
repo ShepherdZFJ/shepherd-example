@@ -1,6 +1,9 @@
 package com.shepherd.basedemo.Coll;
 
+import cn.hutool.core.collection.ListUtil;
+import com.alibaba.excel.util.ListUtils;
 import com.shepherd.basedemo.pojo.User;
+import org.apache.commons.compress.utils.Lists;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -14,13 +17,14 @@ import java.util.stream.Collectors;
 public class CollTest {
 
     public static void main(String[] args) {
-        List<Integer> list = new ArrayList<>();
-        list.add(1);
-        list.add(2);
-        list.add(3);
-        List<Integer> subList = list.subList(1, 2);
-        subList.add(4);
-        System.out.println(list);
+//        List<Integer> list = new ArrayList<>();
+//        list.add(1);
+//        list.add(2);
+//        list.add(3);
+//        List<Integer> subList = list.subList(1, 2);
+//        subList.add(4);
+//        System.out.println(list);
+        testListRemove();
     }
 
     static void testToMap1() {
@@ -108,6 +112,16 @@ public class CollTest {
         List<Integer> list = Arrays.asList(nums);
         list.add(4);
         System.out.println(list);
+    }
+
+    static void testListRemove() {
+        AllotCase allotCase = new AllotCase();
+        allotCase.setUserIds(ListUtils.newArrayList(1,2,3,4,5));
+        List<Integer> userIds = allotCase.getUserIds();
+        System.out.println(userIds);
+        userIds.removeAll(ListUtils.newArrayList(3,4));
+        System.out.println(allotCase.getUserIds());
+
     }
 
 
