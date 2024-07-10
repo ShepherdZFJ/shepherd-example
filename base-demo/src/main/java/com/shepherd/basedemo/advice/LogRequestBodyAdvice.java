@@ -16,7 +16,7 @@ import java.lang.reflect.Type;
  * @date 2024/6/6 18:12
  */
 
-//@ControllerAdvice
+@ControllerAdvice
 public class LogRequestBodyAdvice implements RequestBodyAdvice {
     @Override
     public boolean supports(MethodParameter methodParameter, Type targetType, Class<? extends HttpMessageConverter<?>> converterType) {
