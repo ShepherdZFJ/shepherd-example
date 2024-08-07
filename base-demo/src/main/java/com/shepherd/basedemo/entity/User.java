@@ -42,7 +42,7 @@ public class User {
     @ExcelProperty(value = "姓名", index = 2)
     private String name;
     @ExcelProperty(index = 4)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDate birthday;
     @ExcelProperty(index = 5, value = {"基本信息", "手机号"})
     private String phone;

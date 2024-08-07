@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import javax.servlet.*;
 import javax.servlet.FilterConfig;
-import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
 /**

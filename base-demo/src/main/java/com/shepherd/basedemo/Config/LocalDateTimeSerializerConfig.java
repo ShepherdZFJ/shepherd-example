@@ -16,39 +16,39 @@ import java.time.format.DateTimeFormatter;
  * @version 1.0
  * @date 2024/7/3 14:56
  */
-//@Configuration
-//public class LocalDateTimeSerializerConfig {
-//
-//
-//
-//    @Bean
-//    public LocalDateTimeSerializer localDateTimeSerializer(JacksonProperties properties) {
-//        String dateFormat = properties.getDateFormat();
-//        if (StringUtils.isBlank(dateFormat)) {
-//            dateFormat = "yyyy-MM-dd HH:mm:ss";
-//        }
-//        return new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(dateFormat));
-//    }
-//
-//    @Bean
-//    public LocalDateTimeDeserializer localDateTimeDeserializer(JacksonProperties properties) {
-//        String dateFormat = properties.getDateFormat();
-//        if (StringUtils.isBlank(dateFormat)) {
-//            dateFormat = "yyyy-MM-dd HH:mm:ss";
-//        }
-//        return new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(dateFormat));
-//
-//    }
-//
-//    @Bean
-//    public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer(
-//            LocalDateTimeSerializer localDateTimeSerializer, LocalDateTimeDeserializer localDateTimeDeserializer) {
-//        return builder -> {
-//            // 序列化
-//            builder.serializerByType(LocalDateTime.class, localDateTimeSerializer);
-//            // 反序列化
-//            builder.deserializerByType(LocalDateTime.class, localDateTimeDeserializer);
-//        };
-//    }
-//
-//}
+@Configuration
+public class LocalDateTimeSerializerConfig {
+
+
+
+    @Bean
+    public LocalDateTimeSerializer localDateTimeSerializer(JacksonProperties properties) {
+        String dateFormat = properties.getDateFormat();
+        if (StringUtils.isBlank(dateFormat)) {
+            dateFormat = "yyyy-MM-dd HH:mm:ss";
+        }
+        return new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(dateFormat));
+    }
+
+    @Bean
+    public LocalDateTimeDeserializer localDateTimeDeserializer(JacksonProperties properties) {
+        String dateFormat = properties.getDateFormat();
+        if (StringUtils.isBlank(dateFormat)) {
+            dateFormat = "yyyy-MM-dd HH:mm:ss";
+        }
+        return new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(dateFormat));
+
+    }
+
+    @Bean
+    public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer(
+            LocalDateTimeSerializer localDateTimeSerializer, LocalDateTimeDeserializer localDateTimeDeserializer) {
+        return builder -> {
+            // 序列化
+            builder.serializerByType(LocalDateTime.class, localDateTimeSerializer);
+            // 反序列化
+            builder.deserializerByType(LocalDateTime.class, localDateTimeDeserializer);
+        };
+    }
+
+}

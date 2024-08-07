@@ -1,3 +1,8 @@
+server:
+  port: 18000
+
+
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -14,10 +19,15 @@ spring:
     locale: zh_CN
     time-zone: GMT+8
     default-property-inclusion: non_null
+  cache:
+    type: redis
 
 ip:
   black: 10.0.0.10, 10.0.0.18, 10.33.194.35
   white: 10.33.194.36, 10.33.194.10
+
+
+
 
 
 

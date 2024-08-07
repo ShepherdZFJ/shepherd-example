@@ -27,6 +27,13 @@ public class UserServiceImplTest {
     @Resource
     private UserDAO userDAO;
 
+    @Test
+    public void testUserAll() {
+        List<User> users = userService.listUsers();
+        System.out.println(users);
+
+    }
+
 
     @Test
     public void testWriteLocalDateTime() {
