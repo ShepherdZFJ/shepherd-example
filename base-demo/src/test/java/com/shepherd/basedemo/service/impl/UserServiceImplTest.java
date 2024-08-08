@@ -1,6 +1,7 @@
 package com.shepherd.basedemo.service.impl;
 
 import com.shepherd.basedemo.dao.UserDAO;
+import com.shepherd.basedemo.dto.UserDTO;
 import com.shepherd.basedemo.entity.User;
 import com.shepherd.basedemo.service.UserService;
 import org.junit.Test;
@@ -28,10 +29,18 @@ public class UserServiceImplTest {
     private UserDAO userDAO;
 
     @Test
+    public void testGetUser() {
+//        User user = userService.getUser(8L);
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(8L);
+        User user = userService.getUser(userDTO);
+        System.out.println(user);
+    }
+
+    @Test
     public void testUserAll() {
         List<User> users = userService.listUsers();
         System.out.println(users);
-
     }
 
 
