@@ -62,7 +62,7 @@ public class UserService extends ServiceImpl<UserDAO, User> {
         return list;
     }
 
-    @Cacheable(cacheNames = {"user", "order"})
+//    @Cacheable(cacheNames = {"user", "order"})
     public User getUser(Long id) {
         User user = this.getById(id);
         log.info("走数据库查询了......");

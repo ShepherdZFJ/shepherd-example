@@ -9,6 +9,9 @@ import com.shepherd.basedemo.entity.Address;
 import com.shepherd.basedemo.entity.User;
 import com.shepherd.basedemo.excel.DemoData;
 import com.shepherd.basedemo.excel.anno.ExcelExport;
+import com.shepherd.basedemo.handler.LoginUser;
+import com.shepherd.basedemo.handler.UserSession;
+import com.shepherd.basedemo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cache.annotation.Cacheable;
@@ -34,6 +37,8 @@ public class TestController {
 
     @Resource
     private StringRedisTemplate stringRedisTemplate;
+    @Resource
+    private UserService userService;
 
 
     @ResponseExcel(name = "test1", sheets = @Sheet(sheetName = "testSheet1"))
@@ -104,6 +109,13 @@ public class TestController {
         BeanUtils.copyProperties(param, userDTO);
         System.out.println(userDTO);
         return userDTO;
+    }
+
+    @GetMapping("/loginUser")
+    public User getUser(@RequestParam("id") Long id, @LoginUser UserSession session) {
+        Long userId = session.getId();
+        User user = userService.getUser(userId);
+        return user;
     }
 
 
