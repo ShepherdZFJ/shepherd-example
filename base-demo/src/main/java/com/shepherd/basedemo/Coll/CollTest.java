@@ -3,6 +3,8 @@ package com.shepherd.basedemo.Coll;
 import cn.hutool.core.collection.ListUtil;
 import com.alibaba.excel.util.ListUtils;
 import com.shepherd.basedemo.pojo.User;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.apache.commons.compress.utils.Lists;
 
 import java.util.*;
@@ -26,6 +28,89 @@ public class CollTest {
 //        System.out.println(list);
         testListRemove();
     }
+
+    static void testStream() {
+        List<Integer> nums = ListUtil.of(0, 2, 5, 6, 9, 3, 7, 8);
+    }
+
+    static void testStream2() {
+        List<Employee> employees = Arrays.asList(
+                new Employee("John", "HR", 50000),
+                new Employee("Jane", "IT", 60000),
+                new Employee("Jack", "HR", 55000),
+                new Employee("Jill", "IT", 70000),
+                new Employee("Joe", "Finance", 75000)
+        );
+
+        // 使用 Stream API 分组并收集姓名
+        Map<String, List<String>> employeesByDepartment = employees.stream()
+                .collect(Collectors.groupingBy(
+                        Employee::getDepartment,                       // 分组条件：部门
+                        Collectors.mapping(Employee::getName,          // 收集每个部门中员工的姓名
+                                Collectors.toList())       // 将姓名收集到一个 List 中
+                ));
+
+        // 输出分组结果
+        employeesByDepartment.forEach((department, names) -> {
+            System.out.println("Department: " + department);
+            names.forEach(name -> System.out.println(" - " + name));
+        });
+    }
+
+    static void testStream3() {
+        List<String> list1 = Arrays.asList("apple", "banana", "cherry");
+        List<String> list2 = Arrays.asList("cherry", "date", "elderberry");
+
+        // 判断 list1 是否有任意一个元素在 list2 中存在
+        boolean anyMatch = list1.stream()
+                .anyMatch(list2::contains);
+
+        if (anyMatch) {
+            System.out.println("list1 中有至少一个元素在 list2 中存在");
+        } else {
+            System.out.println("list1 中没有元素在 list2 中存在");
+        }
+    }
+
+    static void testStream4() {
+        List<Person> people = new ArrayList<>();
+        people.add(new Person("Alice", 30, ListUtil.of(new Skill("Java"), new Skill("Python"))));
+        people.add(new Person("Bob", 25, ListUtil.of(new Skill("Python"), new Skill("JavaScript"))));
+        people.add(new Person("Charlie", 35, ListUtil.of(new Skill("Java"), new Skill("C++"))));
+        people.add(new Person("David", 28, ListUtil.of(new Skill("JavaScript"), new Skill("C#"))));
+        people.add(new Person("Eve", 40, ListUtil.of(new Skill("C++"), new Skill("Python"))));
+
+        // 根据技能名称进行分组
+//        Map<String, List<Person>> groupedBySkill = people.stream()
+//                .flatMap(person -> person.getSkills().stream().map(skill -> Map.entry(skill.getName(), person)))
+//                .collect(Collectors.groupingBy(Map.Entry::getKey, Collectors.mapping(Map.Entry::getValue, Collectors.toList())));
+//
+//        groupedBySkill.forEach((skill, peopleWithSkill) -> {
+//            System.out.println("Skill: " + skill);
+//            peopleWithSkill.forEach(person -> System.out.println("  " + person));
+//        });
+    }
+
+    static void testSort() {
+        List<Integer> list = new ArrayList<>();
+        list.add(5);
+        list.add(3);
+        list.add(8);
+        list.add(1);
+
+        // 使用 Collections.sort() 方法进行升序排序
+        Collections.sort(list);
+
+        // 使用 List.sort() 方法进行升序排序
+        list.sort(Integer::compareTo);
+
+        // 使用 Stream.sorted() 方法进行升序排序
+        List<Integer> sortedList = list.stream()
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+
 
     static void testToMap1() {
         List<User> list = new ArrayList<>();
@@ -123,6 +208,28 @@ public class CollTest {
         System.out.println(allotCase.getUserIds());
 
     }
+
+    @Data
+    @AllArgsConstructor
+     static  class Employee {
+         private String name;
+         private String department;
+         private double salary;
+     }
+
+     @Data
+     @AllArgsConstructor
+     static class Skill {
+         private String name;
+     }
+
+     @Data
+     @AllArgsConstructor
+     static class Person {
+         private String name;
+         private int age;
+         private List<Skill> skills;
+     }
 
 
 }
