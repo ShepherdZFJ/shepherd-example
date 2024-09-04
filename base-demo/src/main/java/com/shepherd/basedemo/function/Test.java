@@ -1,8 +1,9 @@
 package com.shepherd.basedemo.function;
 
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Executor;
-import java.util.concurrent.LinkedBlockingQueue;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -55,6 +56,23 @@ public class Test {
                     System.out.println(consumer.get());
                     assert consumer.get() == 2;
                 });
+    }
+
+    public static void testClose() throws IOException {
+        // 创建 10 个任务对象，并且每个任务对象给一个任务编号
+        List<Runnable> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            int k = i + 1;
+            Runnable task
+                    = () -> System.out.println(Thread.currentThread()+":执行任务" + k);
+            list.add(task);
+        }
+
+        ExecutorService service = Executors.newFixedThreadPool(10);
+        for (Runnable task : list) {
+            service.submit(task);
+        }
+        System.in.read();
     }
 
 
