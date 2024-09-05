@@ -27,11 +27,11 @@ public class AsyncUtils {
      * @param <R>
      * @return
      */
-    private static <R> CompletableFuture<R> doInvoker(CallbackTask<R> executeTask) {
+    private static <T,R> CompletableFuture<R> doInvoker(CallbackTask<T,R> executeTask, T t) {
         CompletableFuture<R> invoke = CompletableFuture
                 .supplyAsync(() -> {
                     try {
-                        return executeTask.execute();
+                        return executeTask.execute(t);
                     } catch (Exception exception) {
                         throw new RuntimeException(exception.getMessage());
                     }
@@ -53,24 +53,25 @@ public class AsyncUtils {
 
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        CompletableFuture<Integer> result =
-                AsyncUtils.doInvoker(new CallbackTask<Integer>() {
-                    public Integer execute()  {
-                        int result = 1 + 1;
-                        return result;
+        CompletableFuture<String> result =
+                AsyncUtils.doInvoker(new CallbackTask<Integer, String>() {
+
+                    @Override
+                    public void onSuccess(String result) {
+                        System.out.println("on success result: " + result);
                     }
 
                     @Override
-                    public void onSuccess(Integer integer) {
-                        System.out.println("on success result: " + integer);
+                    public String execute(Integer integer) {
+                        return String.valueOf(integer * 10);
                     }
 
                     @Override
                     public void onFailure(Throwable t) {
                         System.out.println("error " + t.getMessage());
                     }
-                });
-        Integer i = result.get();
-        System.out.println(i);
+                }, 10);
+        String res = result.get();
+        System.out.println(res);
     }
 }
