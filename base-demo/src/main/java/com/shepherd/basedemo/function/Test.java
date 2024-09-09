@@ -25,8 +25,9 @@ public class Test {
         Consumer<String> consumer = (str)->{System.out.println(str.substring(0,2));};
         consumer.accept("hello");
 
-        Supplier supplier = ()->{ return 1024; };
+        Supplier supplier = ()-> 1024;
         System.out.println(supplier.get());
+
         Test test = new Test();
         test.testProducerConsumerInner();
     }
