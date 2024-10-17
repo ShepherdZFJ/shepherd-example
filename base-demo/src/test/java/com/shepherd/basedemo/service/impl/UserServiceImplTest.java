@@ -1,5 +1,8 @@
 package com.shepherd.basedemo.service.impl;
 
+import cn.hutool.core.date.DateField;
+import cn.hutool.core.date.LocalDateTimeUtil;
+import cn.hutool.core.util.RandomUtil;
 import com.shepherd.basedemo.dao.UserDAO;
 import com.shepherd.basedemo.dto.UserDTO;
 import com.shepherd.basedemo.entity.User;
@@ -13,6 +16,7 @@ import javax.annotation.Resource;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 
 /**
@@ -85,15 +89,18 @@ public class UserServiceImplTest {
     List<User> getUserList() {
         List<User> users = new ArrayList<>();
         long i = 1;
-        while (i <= 100000) {
+        while (i <= 3000000) {
             User user = new User();
             user.setUserNo(UUID.randomUUID().toString());
-            user.setBirthday(LocalDate.now());
-            user.setGender( i%2 == 0 ? 0:1);
+            user.setBirthday(LocalDateTime.ofInstant(RandomUtil.randomDay(-1000, 1000).toInstant(), ZoneId.systemDefault()).toLocalDate());
+            int randomInt = RandomUtil.randomInt(100);
+            user.setGender( randomInt%2 == 0 ? 0 : 1);
             user.setEmail(generateRandomEmail());
             user.setPhone(generateRandomPhoneNumber());
             user.setName(generateRandomName());
-            user.setIsDelete(0);
+            user.setIsDelete(randomInt % 5 == 0 ? 0 : 1);
+            user.setCreateTime(LocalDateTimeUtil.now());
+            user.setUpdateTime(RandomUtil.randomDate(new Date(), DateField.DAY_OF_YEAR, -365, 365));
             users.add(user);
             i++;
         }

@@ -13,7 +13,7 @@ import java.io.IOException;
  * @version 1.0
  * @date 2024/5/10 14:58
  */
-@Component
+//@Component
 @Slf4j
 //@WebFilter(urlPatterns = "/*")
 @Order(1)
