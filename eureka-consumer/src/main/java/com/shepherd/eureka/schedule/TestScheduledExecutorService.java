@@ -1,9 +1,7 @@
 package com.shepherd.eureka.schedule;
 
 import java.util.Date;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * @author fjzheng
@@ -20,5 +18,9 @@ public class TestScheduledExecutorService {
 
         scheduledExecutor.schedule(()->System.out.println("task ScheduledExecutorService "+new Date()), 3, TimeUnit.SECONDS);
         System.out.println(1111);
+
+        ArrayBlockingQueue<Object> arrayBlockingQueue = new ArrayBlockingQueue<>(100);
+        LinkedBlockingQueue<Object> linkedBlockingQueue = new LinkedBlockingQueue<>(200);
+        PriorityBlockingQueue<Object> objects = new PriorityBlockingQueue<>(10);
     }
 }

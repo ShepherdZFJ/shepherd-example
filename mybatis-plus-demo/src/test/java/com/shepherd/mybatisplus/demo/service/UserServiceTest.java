@@ -96,11 +96,11 @@ public class UserServiceTest {
     @Test
     public void testServiceBatchAdd() {
         List<User> users = new ArrayList<>();
-        for(long i = 1; i <= 1000; i++) {
+        for(long i = 1; i <= 100000; i++) {
             User user = User.builder()
                     .id(i)
                     .userNo("No-" + i)
-                    .nickname("哈哈")
+                    .nickname("哈哈" + i)
                     .phone("12345678901")
                     .email("shepherd_123@qq.com")
                     .birthday(new Date())

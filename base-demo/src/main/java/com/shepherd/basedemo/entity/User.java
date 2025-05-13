@@ -65,4 +65,6 @@ public class User {
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime createTime;
+
+    private Date updateTime;
 }

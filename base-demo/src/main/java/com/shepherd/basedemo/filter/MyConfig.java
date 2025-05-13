@@ -14,10 +14,10 @@ import javax.annotation.Resource;
 @Configuration
 public class MyConfig {
 
-    @Resource
-    private AFilter aFilter;
-    @Resource
-    private BFilter bFilter;
+//    @Resource
+//    private AFilter aFilter;
+//    @Resource
+//    private BFilter bFilter;
 
 //    @Bean
 //    public FilterRegistrationBean buildBFilter() {

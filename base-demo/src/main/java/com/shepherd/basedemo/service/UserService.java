@@ -100,5 +100,9 @@ public class UserService extends ServiceImpl<UserDAO, User> {
         return user;
     }
 
+    public void firstInitData() {
+
+    }
+
 
 }

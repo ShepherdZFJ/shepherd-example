@@ -15,7 +15,7 @@ public class DataProcessor<T, R> {
         Integer length = DataProcessor.processData("Hello", String::length);
         System.out.println(length); // 输出 5
         Person person = new Person();
-        person.setName("zhangsan");
+        person.setName("zhang san");
         person.setAge(18);
         Student student = DataProcessor.processData(person, DataProcessor::convertToStudent);
         System.out.println(student);
