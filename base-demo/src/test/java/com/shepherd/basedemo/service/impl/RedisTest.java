@@ -57,4 +57,14 @@ public class RedisTest {
         valueOperations.set("hoo", 123l);
 
     }
+
+    @Test
+    public void test01() {
+        redisTemplate.opsForList().leftPush("list-key", "a");
+        redisTemplate.opsForList().leftPushAll("list-key", "b", "c");
+        List<String> list = redisTemplate.opsForList().range("list-key", 0, -1);
+        System.out.println(list);
+
+
+    }
 }

@@ -18,7 +18,7 @@ import java.util.List;
  * @date 2024/8/19 20:38
  */
 
-@Configuration
+//@Configuration
 public class RequestArgumentAndReturnValueConfig implements InitializingBean {
     @Resource
     RequestMappingHandlerAdapter requestMappingHandlerAdapter;

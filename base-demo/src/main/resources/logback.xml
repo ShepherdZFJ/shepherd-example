@@ -3,7 +3,7 @@
 <configuration>
     <property name="APP_NAME" value="common-demo"></property>
     <property name="log.path" value="/home/${APP_NAME}/logs"/>
-    <property name="log.format"  value="%d{yyyy-MM-dd HH:mm:ss.SSS} ${hostname} [${APP_NAME}] [%X{traceId}] %p %c %M [%t@${PID}] : %m%n"></property>
+    <property name="log.format"  value="[${APP_NAME}] [%X{traceId}] [%d{yyyy-MM-dd HH:mm:ss.SSS}] [%p] [%t@${PID}] %c %M: %m%n"></property>
 
     <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">

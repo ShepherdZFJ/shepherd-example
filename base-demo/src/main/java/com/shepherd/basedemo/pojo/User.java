@@ -1,5 +1,6 @@
 package com.shepherd.basedemo.pojo;
 
+import com.shepherd.basedemo.entity.Address;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,4 +20,5 @@ public class User {
     private String userNo;
     private String name;
     private Integer age;
+    private Address address;
 }

@@ -82,14 +82,17 @@ public class UserServiceImplTest {
 
     @Test
     public void testAddBatch() {
-        List<User> userList = getUserList();
-        userService.batchAddUser(userList);
+        for (int i =0; i < 1; i++) {
+            List<User> userList = getUserList();
+            userService.batchAddUser(userList);
+        }
+
     }
 
     List<User> getUserList() {
         List<User> users = new ArrayList<>();
         long i = 1;
-        while (i <= 3000000) {
+        while (i <= 10000) {
             User user = new User();
             user.setUserNo(UUID.randomUUID().toString());
             user.setBirthday(LocalDateTime.ofInstant(RandomUtil.randomDay(-1000, 1000).toInstant(), ZoneId.systemDefault()).toLocalDate());

@@ -1,9 +1,11 @@
 package com.shepherd.basedemo.controller;
 
 import com.alibaba.excel.util.ListUtils;
+import com.google.common.collect.Lists;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.pig4cloud.plugin.excel.annotation.ResponseExcel;
 import com.pig4cloud.plugin.excel.annotation.Sheet;
-import com.shepherd.basedemo.UserParam;
+import com.shepherd.basedemo.param.UserParam;
 import com.shepherd.basedemo.dto.UserDTO;
 import com.shepherd.basedemo.entity.Address;
 import com.shepherd.basedemo.entity.User;
@@ -11,19 +13,20 @@ import com.shepherd.basedemo.excel.DemoData;
 import com.shepherd.basedemo.excel.anno.ExcelExport;
 import com.shepherd.basedemo.handler.LoginUser;
 import com.shepherd.basedemo.handler.UserSession;
+import com.shepherd.basedemo.service.TestService;
 import com.shepherd.basedemo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.xml.crypto.Data;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.*;
+import java.util.concurrent.*;
 
 /**
  * @author fjzheng
@@ -39,6 +42,17 @@ public class TestController {
     private StringRedisTemplate stringRedisTemplate;
     @Resource
     private UserService userService;
+    @Resource
+    private TestService testService;
+
+    private ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
+            .setNameFormat("letter-pool-%d").build();
+    private ExecutorService fixedThreadPool = new ThreadPoolExecutor(Runtime.getRuntime().availableProcessors()*2,
+            Runtime.getRuntime().availableProcessors() * 40,
+            0L,
+            TimeUnit.MILLISECONDS,
+            new LinkedBlockingQueue<Runnable>(Runtime.getRuntime().availableProcessors() * 20),
+            namedThreadFactory);
 
 
     @ResponseExcel(name = "test1", sheets = @Sheet(sheetName = "testSheet1"))
@@ -116,6 +130,34 @@ public class TestController {
         Long userId = session.getId();
         User user = userService.getUser(userId);
         return user;
+    }
+
+    @GetMapping("/file")
+    public void testFile(HttpServletResponse response) throws IOException {
+        ArrayList<String> list = Lists.newArrayList("665441 算法笔记.胡凡.pdf");
+        testService.downloadFile(list, response);
+    }
+
+    @GetMapping("/async")
+    public void testAsync() {
+        MDC.put("traceId", UUID.randomUUID().toString().replace("-", ""));
+        log.info("打印日志了");
+        fixedThreadPool.execute(()->{
+            log.info("异步执行了");
+            try {
+//                TimeUnit.SECONDS.sleep(3);
+                User  user = null;
+                String name = user.getName();
+            } catch (Exception e) {
+                log.error("异步报错了：", e);
+            }
+        });
+        MDC.clear();
+    }
+
+    public static void main(String[] args) {
+        String s = UUID.randomUUID().toString().replace("-", "");
+        System.out.println(s);
     }
 
 

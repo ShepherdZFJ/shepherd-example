@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
+import javax.validation.ConstraintViolationException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -62,6 +63,9 @@ public class GlobalAdviceHandler {
             });
             log.error("数据校验出现错误：", e);
             return ResponseVO.failure(ResponseStatusEnum.BAD_REQUEST, map);
+        } else if (e instanceof ConstraintViolationException) {
+            log.error("数据校验出现错误：", e);
+            return ResponseVO.failure(ResponseStatusEnum.BAD_REQUEST, e.getMessage());
         } else if (e instanceof HttpRequestMethodNotSupportedException) {
             log.error("请求方法错误：", e);
             return ResponseVO.failure(ResponseStatusEnum.BAD_REQUEST.getCode(), "请求方法不正确");

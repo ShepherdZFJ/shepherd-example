@@ -8,10 +8,10 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: root
-    url: jdbc:mysql://127.0.0.1:3306/db_test?&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF8&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true&rewriteBatchedStatements=true
+    url: jdbc:mysql://10.10.0.10:3306/db_test?&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF8&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true&rewriteBatchedStatements=true
   redis:
-    host: 10.10.0.10
-    port: 6379
+    host: 118.178.230.205
+    port: 26379
   application:
     name: base-demo111
   jackson:
@@ -21,10 +21,22 @@ spring:
     default-property-inclusion: non_null
   cache:
     type: redis
+  main:
+    allow-circular-references: true
 
 ip:
   black: 10.0.0.10, 10.0.0.18, 10.33.194.35
   white: 10.33.194.36, 10.33.194.10
+
+
+aliyun-oss:
+  endpoint: http://oss-cn-hangzhou.aliyuncs.com
+  accessKeyId: LTAI4GHpv2y35PBVWUt42fJ6
+  accessKeySecret: VoF8212psWmcsb424bKVeg7eMZkKzA
+  bucketName: shepherd-mall
+  maxUploadSize: 1048576000
+  maxInMemorySize: 4096
+
 
 
 
