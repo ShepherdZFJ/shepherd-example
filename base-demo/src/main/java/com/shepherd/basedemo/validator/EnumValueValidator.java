@@ -17,7 +17,6 @@ public class EnumValueValidator implements ConstraintValidator<EnumValue, Object
 
     private Class<? extends CheckEnumValue> clz;
 
-    @SneakyThrows
     @Override
     public void initialize(EnumValue constraintAnnotation) {
         clz = constraintAnnotation.linkEnum();
