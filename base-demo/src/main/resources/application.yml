@@ -10,7 +10,7 @@ spring:
     password: root
     url: jdbc:mysql://10.10.0.10:3306/db_test?&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF8&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true&rewriteBatchedStatements=true
   redis:
-    host: 118.178.230.205
+    host: 10.10.0.10
     port: 26379
   application:
     name: base-demo111
