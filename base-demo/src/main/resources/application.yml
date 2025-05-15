@@ -31,8 +31,8 @@ ip:
 
 aliyun-oss:
   endpoint: http://oss-cn-hangzhou.aliyuncs.com
-  accessKeyId: LTAI4GHpv2y35PBVWUt42fJ6
-  accessKeySecret: VoF8212psWmcsb424bKVeg7eMZkKzA
+  accessKeyId: 1111
+  accessKeySecret: 22222
   bucketName: shepherd-mall
   maxUploadSize: 1048576000
   maxInMemorySize: 4096
